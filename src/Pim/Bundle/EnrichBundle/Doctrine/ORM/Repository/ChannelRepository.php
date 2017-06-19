@@ -51,7 +51,11 @@ class ChannelRepository extends EntityRepository implements DatagridRepositoryIn
             ->leftJoin('category.translations', 'ct', 'WITH', 'ct.locale = :localeCode')
             ->leftJoin($rootAlias . '.translations', 'translation', 'WITH', 'translation.locale = :localeCode');
 
-        $qb->groupBy($rootAlias);
+        $qb
+            ->groupBy($rootAlias.'.id')
+            ->addGroupBy('categoryLabel')
+            ->addGroupBy('channelLabel')
+            ->addGroupBy('translation.label');
 
         return $qb;
     }

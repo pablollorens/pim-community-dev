@@ -77,7 +77,11 @@ class GroupRepository extends EntityRepository implements
             ->leftJoin('g.axisAttributes', 'attribute')
         ;
 
-        $qb->groupBy('g');
+        $qb
+            ->groupBy('g.id')
+            ->addGroupBy('groupLabel')
+            ->addGroupBy('typeLabel')
+            ->addGroupBy('translation.label');
 
         return $qb;
     }
