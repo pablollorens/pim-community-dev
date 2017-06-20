@@ -207,7 +207,7 @@ class NavigationContext extends PimContext implements PageObjectAwareInterface
      * @param string $page
      *
      * @Given /^I edit the "([^"]*)" (\w+)$/
-     * @Given /^I am on the "([^"]*)" ((?!channel)(?!family)\w+) page$/
+     * @Given /^I am on the "([^"]*)" ((?!channel)(?!family)(?!attribute)\w+) page$/
      */
     public function iAmOnTheEntityEditPage($identifier, $page)
     {
