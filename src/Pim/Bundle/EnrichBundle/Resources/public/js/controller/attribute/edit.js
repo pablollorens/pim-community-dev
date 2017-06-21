@@ -62,8 +62,13 @@ function (
                             this.on('pim:controller:can-leave', function (event) {
                                 form.trigger('pim_enrich:form:can-leave', event);
                             });
+
+                            // TODO: check if it is still needed with the new mass edith
+                            form.on('pim_enrich:form:entity:post_fetch', function (data) {
+                                FetcherRegistry.getFetcher('attribute').clear(data.code);
+                            });
+
                             form.setData(attribute);
-                            form.trigger('pim_enrich:form:entity:post_fetch', attribute);
                             form.setElement(this.$el).render();
                         }.bind(this));
                 }.bind(this))

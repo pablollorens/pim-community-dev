@@ -99,6 +99,7 @@ define(['jquery', 'underscore', 'backbone', 'routing'], function ($, _, Backbone
          * Fetch all entities for the given identifiers
          *
          * @param {Array} identifiers
+         * @param {Object} options
          *
          * @return {Promise}
          */
