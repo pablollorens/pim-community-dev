@@ -2,17 +2,22 @@
 
 namespace Pim\Behat\Context;
 
+use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\MinkExtension\Context\RawMinkContext;
-use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Context\FeatureContext;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class PimContext extends RawMinkContext implements KernelAwareInterface
+class PimContext extends RawMinkContext implements KernelAwareContext
 {
     /** @var array */
     protected static $placeholderValues = [];
 
     /** @var KernelInterface */
     private $kernel;
+
+    /** @var FeatureContext */
+    protected $mainContext;
 
     /** @var string */
     private static $kernelRootDir;
@@ -44,6 +49,17 @@ class PimContext extends RawMinkContext implements KernelAwareInterface
     public function replacePlaceholders($value)
     {
         return strtr($value, self::$placeholderValues);
+    }
+
+    /**
+     * @BeforeScenario
+     *
+     * @param BeforeScenarioScope $scope
+     */
+    public function gatherContexts(BeforeScenarioScope $scope)
+    {
+        $environment = $scope->getEnvironment();
+        $this->mainContext = $environment->getContext(FeatureContext::class);
     }
 
     /**
@@ -100,6 +116,14 @@ class PimContext extends RawMinkContext implements KernelAwareInterface
     protected function getNavigationContext()
     {
         return $this->getMainContext()->getSubcontext('navigation');
+    }
+
+    /**
+     * @return FeatureContext
+     */
+    protected function getMainContext(): FeatureContext
+    {
+        return $this->mainContext;
     }
 
     /**

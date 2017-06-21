@@ -3,11 +3,9 @@
 namespace Context;
 
 use Akeneo\Component\Batch\Model\JobInstance;
-use Behat\Behat\Context\Step;
 use Oro\Bundle\UserBundle\Entity\Role;
 use Pim\Behat\Context\NavigationContext as BaseNavigationContext;
 use Pim\Bundle\CatalogBundle\Entity\Category;
-use Pim\Bundle\CatalogBundle\Entity\Family;
 use Pim\Component\Catalog\Model\AssociationTypeInterface;
 use Pim\Component\Catalog\Model\AttributeGroupInterface;
 use Pim\Component\Catalog\Model\GroupTypeInterface;
